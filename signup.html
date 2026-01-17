@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form - Vetri Digital College</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-green: #63b337;
+            --banner-mint: #a8e6cf;
+            --footer-mint: #d4edd4;
+            --input-border: #999;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 4%;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo-placeholder {
+            width: 35px;
+            height: 35px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 12px;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            padding: 6px 18px;
+            border: 1.5px solid var(--primary-green);
+            background: transparent;
+            color: var(--primary-green);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-fill {
+            padding: 6px 18px;
+            border: none;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Banner */
+        .page-banner {
+            background-color: var(--banner-mint);
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .page-banner h1 {
+            font-weight: 500;
+            font-size: 24px;
+            color: #222;
+        }
+
+        /* Main Container & Card */
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .registration-card {
+            display: flex;
+            width: 850px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        .image-box {
+            flex: 1;
+            background-color: #c9e9c9; /* Soft green from image */
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .form-box {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .form-box h2 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Form Inputs */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary-green);
+        }
+
+        .btn-create {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-create:hover {
+            background-color: #4fa025;
+        }
+
+        .btn-google {
+            width: 100%;
+            padding: 12px;
+            background-color: #fff;
+            color: var(--primary-green);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-google:hover {
+            background-color: #f5f5f5;
+        }
+
+        .google-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--footer-mint);
+            padding: 50px 8% 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .footer-content h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-content ul {
+            list-style: none;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #444;
+            cursor: pointer;
+        }
+
+        .contact-info p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Message styles */
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .registration-card {
+                flex-direction: column;
+                width: 95%;
+            }
+            .image-box {
+                height: 200px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            .search-container {
+                display: none; /* Hide search on small screens */
+            }
+            header {
+                flex-wrap: wrap;
+            }
+            .nav-right {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-left">
+            <img src="images/logo.png" class="logo-box">
+                <div class="logo-placeholder"></div>
+                <span>Vetri Digital College</span>
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="What do you want to learn?">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="nav-right">
+            <a href="login.html" class="btn-outline">Login</a>
+            <a href="signup.html" class="btn-fill">SignUp</a>
+        </div>
+    </header>
+
+    <div class="page-banner">
+        <h1>Registration form</h1>
+    </div>
+
+    <main>
+        <div class="registration-card">
+            <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Student learning">
+            </div>
+
+            <div class="form-box">
+                <h2>Sign Up</h2>
+                
+                <!-- Success/Error Messages -->
+                <div id="successMessage" class="message success-message"></div>
+                <div id="errorMessage" class="message error-message"></div>
+                
+                <form id="regForm">
+                    <div class="input-wrapper">
+                        <i class="far fa-user"></i>
+                        <input type="text" id="name" placeholder="Name" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="far fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="pass" placeholder="Password" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirm_pass" placeholder="Confirm Password" required>
+                    </div>
+
+                    <button type="submit" class="btn-create">Create an account</button>
+                    
+                    <button type="button" class="btn-google" id="googleSignup">
+                        <svg class="google-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+                </form>
+                
+                <p style="margin-top: 15px; text-align: center; font-size: 14px; color: #666;">
+                    Already have an account? <a href="login.html" style="color: var(--primary-green); text-decoration: none; font-weight: 500;">Login here</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo-area">
+                <div class="logo-placeholder"></div>
+                <span>Vetri Digital College</span>
+            </div>
+
+            <div>
+                <h3>Other Links</h3>
+                <ul>
+                    <li><a href="about.html" style="text-decoration: none; color: inherit;">About us</a></li>
+                    <li><a href="contact.html" style="text-decoration: none; color: inherit;">Contact us</a></li>
+                    <li><a href="privacy.html" style="text-decoration: none; color: inherit;">Privacy policy</a></li>
+                    <li><a href="terms.html" style="text-decoration: none; color: inherit;">Terms of use</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="team.html" style="text-decoration: none; color: inherit;">Our team</a></li>
+                    <li><a href="#testimonials" style="text-decoration: none; color: inherit;">Testimonials</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Address</h3>
+                <p><i class="far fa-envelope"></i> Vetridigitalcollege.com</p>
+                <p><i class="fas fa-phone"></i> 8438164827 / 8438781327</p>
+                <p><i class="fas fa-map-marker-alt"></i> VTS & VIS, April's Complex,<br>Shanthi Complex, Surandai.</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            Copyright © 2025 Vetri digital college | All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('regForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const pass = document.getElementById('pass').value;
+            const confirmPass = document.getElementById('confirm_pass').value;
+
+            // Clear previous messages
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+
+            // Validation
+            if(!name || !email || !pass || !confirmPass) {
+                showError("Please fill in all fields");
+                return;
+            }
+
+            if(pass !== confirmPass) {
+                showError("Error: Passwords do not match!");
+                return;
+            }
+
+            if(pass.length < 6) {
+                showError("Password must be at least 6 characters long");
+                return;
+            }
+
+            if(!validateEmail(email)) {
+                showError("Please enter a valid email address");
+                return;
+            }
+
+            // Store user data in localStorage (simulating user registration)
+            const userData = {
+                name: name,
+                email: email,
+                password: pass, // In real app, this should be hashed
+                registeredAt: new Date().toISOString()
+            };
+
+            try {
+                // Check if users array exists in localStorage
+                let users = JSON.parse(localStorage.getItem('vetriUsers')) || [];
+                
+                // Check if email already exists
+                const existingUser = users.find(user => user.email === email);
+                if(existingUser) {
+                    showError("This email is already registered. Please login instead.");
+                    return;
+                }
+                
+                // Add new user
+                users.push(userData);
+                localStorage.setItem('vetriUsers', JSON.stringify(users));
+                
+                // Set login state
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('currentUserName', name);
+                localStorage.setItem('currentUserEmail', email);
+                
+                showSuccess("Account created successfully! Redirecting to homepage...");
+                
+                // Redirect to index.html after successful signup
+                setTimeout(() => {
+                    window.location.href = 'index.html?signup=success';
+                }, 1500);
+                
+            } catch(error) {
+                showError("An error occurred. Please try again.");
+                console.error("Signup error:", error);
+            }
+        });
+
+        // Google signup button
+        document.getElementById('googleSignup').addEventListener('click', function() {
+            // In a real application, this would integrate with Google OAuth
+            // For now, we'll simulate Google signup
+            showSuccess("Google signup would be implemented here. For demo, please use the form.");
+            
+            // Simulate Google signup (for demo purposes)
+            setTimeout(() => {
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('currentUserName', 'Google User');
+                localStorage.setItem('currentUserEmail', 'googleuser@example.com');
+                window.location.href = 'index.html?signup=success&provider=google';
+            }, 1000);
+        });
+
+        // Helper functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                successEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+            if(isLoggedIn) {
+                // If user is already logged in, redirect to home
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+
+</body>
+</html>

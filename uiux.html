@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Designing - Course Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        /* --- CSS Variables for Exact Colors --- */
+        :root {
+            --brand-green: #2fb40d;
+            --mint-bg: #7ce5c4;
+            --text-dark: #111;
+            --border-light: #ddd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+        /* --- Navbar Styles --- */
+        .navbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 5%; background: white; border-bottom: 1px solid var(--border-light);
+            height: 90px; position: sticky; top: 0; z-index: 100;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #333; }
+        .logo { height: 75px; }
+
+        .search-bar { flex-grow: 1; max-width: 450px; margin: 0 40px; position: relative; }
+        .search-bar input {
+            width: 100%; padding: 12px 20px; border: 1px solid var(--border-light);
+            border-radius: 8px; font-size: 14px; outline: none;
+        }
+
+        .nav-right { display: flex; gap: 15px; }
+        
+        /* Functional ahref tags styled as buttons */
+        .nav-btn {
+            text-decoration: none; padding: 10px 30px; border-radius: 8px;
+            font-weight: 600; transition: 0.3s; text-align: center;
+        }
+        .login-btn { color: var(--brand-green); border: 1px solid var(--border-light); background: white; }
+        .signup-btn { color: white; background: var(--brand-green); }
+        .login-btn:hover { background: #f9f9f9; }
+        .signup-btn:hover { background: #258f0a; }
+
+        /* --- Hero Section --- */
+        .hero { background-color: var(--mint-bg); padding: 80px 5%; min-height: 60vh; }
+        .title { color: var(--brand-green); font-size: 3.2rem; margin-bottom: 30px; font-weight: 600; }
+        .description { font-size: 1.6rem; line-height: 1.4; max-width: 850px; color: var(--text-dark); margin-bottom: 40px; }
+
+        .instructor-group { display: flex; align-items: center; gap: 15px; margin-bottom: 35px; }
+        .avatars { display: flex; }
+        .avatar { width: 55px; height: 55px; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+        .avatar.overlap { margin-left: -15px; }
+        .instructor-text { font-size: 1.2rem; color: #000; }
+
+        .price-box { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
+        .old-price { font-size: 2rem; color: #666; text-decoration: line-through; }
+        .new-price { font-size: 2.5rem; font-weight: 700; color: #000; }
+
+        .buy-now {
+            background: var(--brand-green); color: white; border: none;
+            padding: 15px 50px; border-radius: 10px; font-size: 1.2rem;
+            font-weight: 600; cursor: pointer; transition: transform 0.2s;
+        }
+        .buy-now:active { transform: scale(0.97); }
+
+        /* --- Content Section Below Hero --- */
+        .content-section {
+            padding: 60px 5%;
+            background-color: #f7fdf9;
+        }
+
+        .content-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        /* Feature Card Styles */
+        .features-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item { display: flex; align-items: center; gap: 15px; }
+
+        .icon-circle {
+            width: 45px; height: 45px;
+            border: 1.5px solid var(--brand-green);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: var(--brand-green);
+        }
+
+        .info h4 { margin: 0; font-size: 17px; font-weight: 600; }
+        .info p { margin: 0; font-size: 13px; color: #666; }
+
+        /* The Tab Bar */
+        .tab-bar {
+            background-color: #d4edda;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            background: transparent;
+            color: #333;
+        }
+
+        /* Active State */
+        .tab-btn.active {
+            background-color: var(--brand-green);
+            color: white;
+        }
+
+        /* Tab Content Sections */
+        .tab-content {
+            display: none; /* Hidden by default */
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block; /* Show active section */
+        }
+
+        .tab-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .tab-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .tab-content ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .tab-content li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- NEW CODE FROM SECOND HTML STARTS HERE --- */
+        /* Skills Tags Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .skill-tag {
+            background-color: #d4edda;
+            color: #0b5345;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tag i {
+            font-size: 16px;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            margin-bottom: 40px;
+        }
+
+        .tools-list {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tool-item i {
+            font-size: 20px;
+        }
+
+        /* Branding Colors for Tool Icons */
+        .ic-figma { color: #F24E1E; }
+        .ic-adobe { color: #FF0000; }
+        .ic-sketch { color: #F7B500; }
+        .ic-xd { color: #FF61F6; }
+        .ic-invision { color: #FF3366; }
+        .ic-zeplin { color: #FDBD39; }
+        .ic-framer { color: #0055FF; }
+
+        /* Text Content Sections */
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #555;
+            text-align: justify;
+            margin-top: 10px;
+        }
+        /* --- NEW CODE FROM SECOND HTML ENDS HERE --- */
+
+        /* --- Modal Overlay --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); display: none; justify-content: center;
+            align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 15px; width: 380px;
+            text-align: center; position: relative; animation: pop 0.3s ease;
+        }
+        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .close { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #888; }
+        .modal-content h2 { margin-bottom: 25px; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .modal-content button { width: 100%; padding: 12px; background: var(--brand-green); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="hamburger"><span></span><span></span><span></span></div>
+            <img src="images/logo.png" alt="Vetri Logo" class="logo">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="What do want to learn?">
+        </div>
+
+        <div class="nav-right">
+            <a href="#login" class="nav-btn login-btn" id="openLogin">Login</a>
+            <a href="#signup" class="nav-btn signup-btn" id="openSignup">SignUp</a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <h1 class="title">UI/UX Designing</h1>
+        <p class="description">
+            Master the Art of UI/UX Design: Create Beautiful, User-Friendly Interfaces. Learn design principles, prototyping, and user research to launch your design career!
+        </p>
+
+        <div class="instructor-group">
+            <div class="avatars">
+                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya" class="avatar">
+                <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Deepan" class="avatar overlap">
+            </div>
+            <p class="instructor-text">Instructor: <b>Priya, Deepan</b></p>
+        </div>
+
+        <div class="price-box">
+            <span class="old-price">₹1,800</span>
+            <span class="new-price">₹600</span>
+        </div>
+
+        <button class="buy-now">Buy Now</button>
+    </main>
+
+    <!-- New Content Section with Tabs -->
+    <section class="content-section">
+        <div class="content-container">
+            <h2 class="section-title">UI/UX Design Course Features</h2>
+
+            <div class="features-card">
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fa-regular fa-user"></i></div>
+                    <div class="info"><h4>Anyone</h4><p>Can learn (IT/Non IT)</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fa-solid fa-users"></i></div>
+                    <div class="info"><h4>180+</h4><p>Learners</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fa-regular fa-credit-card"></i></div>
+                    <div class="info"><h4>1 Time</h4><p>Payment</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fa-regular fa-clock"></i></div>
+                    <div class="info"><h4>70Hrs</h4><p>Content Duration</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fa-solid fa-language"></i></div>
+                    <div class="info"><h4>Languages</h4><p>Tamil, English</p></div>
+                </div>
+            </div>
+
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="openTab(event, 'overview')">Course Overview</button>
+                <button class="tab-btn" onclick="openTab(event, 'reviews')">Reviews</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <h3>Course Overview</h3>
+                <p>This comprehensive UI/UX Design course takes you from beginner to professional designer. You'll learn user-centered design principles, prototyping, and usability testing to create exceptional digital experiences.</p>
+                <ul>
+                    <li>Design Thinking Process - Empathize, define, ideate, prototype, test</li>
+                    <li>User Research Methods - Interviews, surveys, personas, user journeys</li>
+                    <li>Wireframing & Prototyping - From low-fidelity to high-fidelity designs</li>
+                    <li>UI Design Principles - Color theory, typography, layout, visual hierarchy</li>
+                    <li>Interaction Design - Micro-interactions, animations, transitions</li>
+                    <li>Design Systems - Creating consistent, scalable design libraries</li>
+                    <li>Usability Testing - Conducting tests and analyzing user feedback</li>
+                    <li>Portfolio Development - Building a professional design portfolio</li>
+                    <li>Real Projects - Design mobile apps, websites, and dashboards</li>
+                </ul>
+                <p>The course includes hands-on projects, design critiques, and lifetime access to all materials and design assets.</p>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h3>Student Reviews</h3>
+                <p>⭐ ⭐ ⭐ ⭐ ⭐ "Excellent course! The design principles are explained clearly in both Tamil and English. I landed my first UI design job!" - Kavitha R.</p>
+                <p>⭐ ⭐ ⭐ ⭐ ⭐ "The Figma tutorials are fantastic! I can now create professional prototypes and design systems." - Vikram S.</p>
+                <p>⭐ ⭐ ⭐ ⭐ ⭐ "The project-based approach helped me build a strong portfolio that impressed employers." - Anjali M.</p>
+                <p>⭐ ⭐ ⭐ ⭐ "Great for beginners. The user research module is particularly valuable for understanding real users." - Ramesh K.</p>
+                <p>⭐ ⭐ ⭐ ⭐ ⭐ "Bilingual teaching made complex design concepts accessible. The portfolio guidance was invaluable." - Priya N.</p>
+            </div>
+
+            <!-- NEW CONTENT ADDED HERE - EXACTLY FROM SECOND HTML -->
+            <section style="margin-top: 60px;">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark);">Skills you'll gain</h2>
+                <div class="skills-container">
+                    <span class="skill-tag"><i class="fas fa-pencil-ruler"></i> User Research</span>
+                    <span class="skill-tag"><i class="fas fa-user-friends"></i> User Personas</span>
+                    <span class="skill-tag"><i class="fas fa-project-diagram"></i> Information Architecture</span>
+                    <span class="skill-tag"><i class="fas fa-sitemap"></i> Wireframing</span>
+                    <span class="skill-tag"><i class="fas fa-palette"></i> Visual Design</span>
+                    <span class="skill-tag"><i class="fas fa-mobile-alt"></i> Mobile UI Design</span>
+                    <span class="skill-tag"><i class="fas fa-desktop"></i> Web UI Design</span>
+                    <span class="skill-tag"><i class="fas fa-bolt"></i> Interaction Design</span>
+                    <span class="skill-tag"><i class="fas fa-vial"></i> Usability Testing</span>
+                    <span class="skill-tag"><i class="fas fa-layer-group"></i> Design Systems</span>
+                    <span class="skill-tag"><i class="fas fa-chart-line"></i> UX Analytics</span>
+                    <span class="skill-tag"><i class="fas fa-briefcase"></i> Portfolio Building</span>
+                </div>
+            </section>
+
+            <section class="tools-section">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark);">Tools You Learn</h2>
+                <div class="tools-list">
+                    <span class="tool-item"><i class="devicon-figma-plain ic-figma"></i> Figma,</span>
+                    <span class="tool-item"><i class="devicon-adobe-plain ic-adobe"></i> Adobe XD,</span>
+                    <span class="tool-item"><i class="devicon-sketch-plain ic-sketch"></i> Sketch,</span>
+                    <span class="tool-item"><i class="fas fa-paint-brush" style="color: #FF61F6;"></i> Adobe Photoshop,</span>
+                    <span class="tool-item"><i class="devicon-invision-plain ic-invision"></i> InVision,</span>
+                    <span class="tool-item"><i class="devicon-zeplin-plain ic-zeplin"></i> Zeplin,</span>
+                    <span class="tool-item"><i class="devicon-framer-plain ic-framer"></i> Framer.</span>
+                </div>
+            </section>
+
+            <section class="content-block">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark);">UI/UX Design Course Details</h2>
+                <p>
+                    Unlock your potential as a UI/UX Designer with our expertly designed online course. 
+                    This program covers everything from user research and wireframing to visual design and prototyping. 
+                    Gain hands-on experience with industry-standard tools like Figma, Adobe XD, and Sketch. 
+                    Learn to create user-centered designs for mobile apps, websites, and enterprise applications. 
+                    Master design thinking methodologies, usability testing, and portfolio development to launch 
+                    your career in the high-demand field of digital design.
+                </p>
+            </section>
+
+            <section class="content-block">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark);">Certification Details</h2>
+                <p>
+                    Upon successfully completing the UI/UX Design Online Course, you will receive an industry-recognized 
+                    certification that validates your expertise in user interface and user experience design. 
+                    The certificate includes a shareable digital badge that you can add to your LinkedIn profile, 
+                    resume, and portfolio to showcase your design skills to potential employers and clients.
+                </p>
+            </section>
+            <!-- END OF NEW CONTENT -->
+
+        </div>
+    </section>
+
+    <!-- CURRICULUM ACCORDION SECTION ADDED HERE -->
+    <div style="padding: 60px 5%; background-color: #fff;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 22px; font-weight: 600; margin: 0;">Course Curriculum</h2>
+                <a href="#" style="background-color: #2fb40d; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500;">Download Brochure</a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;" id="curriculumList">
+                <!-- Curriculum items will be generated by JavaScript -->
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-top: 25px;">
+                <button class="show-more-btn" id="showMoreBtn" style="background-color: white; border: 1px solid #ddd; padding: 8px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    Show more days <span class="arrow" style="margin-bottom: 2px; border: solid #666; border-width: 0 2px 2px 0; display: inline-block; padding: 3px; transform: rotate(45deg); transition: transform 0.3s;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER SECTION ADDED HERE -->
+<footer class="footer-wrapper" style="background-color: #CFE9CC; padding: 50px 8% 20px 8%; color: #1a1a1a;">
+    <div class="footer-content" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; padding-bottom: 40px;">
+        <div class="footer-branding" style="display: flex; align-items: center; gap: 15px; flex: 1.2;">
+            <img src="images/logo.png" alt="Vetri Logo" style="width: 70px; height: 70px; object-fit: contain;">
+            <h2 style="font-size: 1.4rem; font-weight: 600; line-height: 1.2; color: #222;">Vetri Digital <br> College</h2>
+        </div>
+
+        <div class="footer-column" style="flex: 1; min-width: 150px; margin-top: 10px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 18px; font-weight: 600;">Other Links</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">About us</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">Contact us</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">Privacy policy</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">Terms of use</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column" style="flex: 1; min-width: 150px; margin-top: 10px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 18px; font-weight: 600;">Company</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">Our team</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" style="text-decoration: none; color: #333; font-size: 0.95rem; transition: 0.3s;">Testimonials</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column address-column" style="flex: 1.5; min-width: 150px; margin-top: 10px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 18px; font-weight: 600;">Address</h3>
+            <div class="contact-row" style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 0.95rem;">
+                <span class="icon" style="font-style: normal; width: 20px;">✉</span>
+                <span>Vetridigitalcollege.com</span>
+            </div>
+            <div class="contact-row" style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 0.95rem;">
+                <span class="icon" style="font-style: normal; width: 20px;">📞</span>
+                <span>8438164827 / 8438781327</span>
+            </div>
+            <div class="contact-row" style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 0.95rem;">
+                <span class="icon" style="font-style: normal; width: 20px;">📍</span>
+                <span>VTS & VIS, April's Complex,<br>Shanthi Complex, Surandai.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom" style="border-top: 1px solid rgba(0, 0, 0, 0.1); text-align: center; padding-top: 25px; font-size: 0.9rem; letter-spacing: 0.5px;">
+        <p id="copyright-text"></p>
+    </div>
+</footer>
+
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 id="modalTitle">Login</h2>
+            <form id="authForm">
+                <div id="signupOnly" style="display: none;">
+                    <input type="text" placeholder="Full Name">
+                </div>
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" id="submitBtn">Proceed</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('authModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const signupFields = document.getElementById('signupOnly');
+        const submitBtn = document.getElementById('submitBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        // Function to open modal based on type
+        function openAuth(type, e) {
+            e.preventDefault(); // Prevents page jump for ahref
+            modal.style.display = 'flex';
+            if (type === 'signup') {
+                modalTitle.innerText = "Create Account";
+                signupFields.style.display = "block";
+                submitBtn.innerText = "Sign Up";
+            } else {
+                modalTitle.innerText = "Welcome Back";
+                signupFields.style.display = "none";
+                submitBtn.innerText = "Login";
+            }
+        }
+
+        // Listeners for navigation links
+        document.getElementById('openLogin').addEventListener('click', (e) => openAuth('login', e));
+        document.getElementById('openSignup').addEventListener('click', (e) => openAuth('signup', e));
+
+        // Close logic
+        closeModal.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; };
+
+        // Form Submission
+        document.getElementById('authForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert("Form submitted successfully!");
+            modal.style.display = 'none';
+        }
+
+        // Tab Switching Function
+        function openTab(evt, tabName) {
+            // 1. Hide all content sections
+            const sections = document.querySelectorAll('.tab-content');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // 2. Remove "active" class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // 3. Show the current tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // 4. Add "active" class to the button that was clicked
+            evt.currentTarget.classList.add('active');
+        }
+
+        // Simple script to log interaction
+        document.querySelectorAll('.skill-tag').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.05)';
+                item.style.transition = '0.2s';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+
+        // CURRICULUM ACCORDION SCRIPT
+        const curriculumList = document.getElementById('curriculumList');
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        const totalDays = 30; // Total items in curriculum
+        const initialVisible = 20; // Matches your image (1-20 visible)
+
+        // Generate the Day Items
+        for (let i = 1; i <= totalDays; i++) {
+            const dayFormatted = i < 10 ? `0${i}` : i;
+            const isHidden = i > initialVisible ? 'hidden' : '';
+            
+            const dayHtml = `
+                <div class="day-item ${isHidden}" style="border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: white;">
+                    <button class="day-header" style="width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; text-align: left; font-size: 16px; color: #333; transition: background 0.2s;">
+                        <span>Day ${dayFormatted}</span>
+                        <i class="arrow" style="border: solid #666; border-width: 0 2px 2px 0; display: inline-block; padding: 3px; transform: rotate(45deg); transition: transform 0.3s;"></i>
+                    </button>
+                    <div class="day-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #fff;">
+                        <div class="link-box" style="padding: 20px;">
+                            <a href="https://youtu.be/MBblN98-5lg?si=JsAxsGJktSZVynj7" class="course-link" style="color: #2fb40d; text-decoration: none; font-weight: 500;">Go to Day ${dayFormatted} Resources &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            curriculumList.insertAdjacentHTML('beforeend', dayHtml);
+        }
+
+        // Accordion Toggle Logic
+        document.querySelectorAll('.day-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                button.classList.toggle('active');
+                
+                // Toggle arrow rotation
+                const arrow = button.querySelector('.arrow');
+                if (button.classList.contains('active')) {
+                    arrow.style.transform = 'rotate(-135deg)';
+                    content.style.maxHeight = '200px';
+                    content.style.borderTop = '1px solid #ddd';
+                } else {
+                    arrow.style.transform = 'rotate(45deg)';
+                    content.style.maxHeight = '0';
+                    content.style.borderTop = 'none';
+                }
+            });
+        });
+
+        // Show More Logic
+        showMoreBtn.addEventListener('click', () => {
+            const hiddenItems = document.querySelectorAll('.day-item.hidden');
+            hiddenItems.forEach(item => item.classList.remove('hidden'));
+            showMoreBtn.style.display = 'none'; // Hide button after showing all
+        });
+
+        // FOOTER COPYRIGHT SCRIPT
+        const copyrightYear = 2025;
+        const collegeName = "Vetri digital college";
+        document.getElementById('copyright-text').innerText = 
+            `Copyright © ${copyrightYear} ${collegeName} | All Rights Reserved`;
+    </script>
+</body>
+</html>

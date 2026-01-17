@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Vetri Digital College</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body { 
+            background-color: #ffffff; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            padding: 10px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .nav-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+        }
+        
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-img { 
+            height: 50px; 
+        }
+
+        .search-container {
+            position: relative;
+            width: 40%;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-login-nav {
+            padding: 8px 20px;
+            background: none;
+            border: 1px solid #5cb85c;
+            color: #5cb85c;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-signup-nav {
+            padding: 8px 20px;
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Banner */
+        .banner {
+            background-color: #A3E4D7; /* Exact Mint Green */
+            text-align: center;
+            padding: 50px 0;
+            flex-shrink: 0;
+        }
+
+        .banner h1 {
+            font-weight: 500;
+            color: #333;
+            font-size: 28px;
+        }
+
+        /* Login Card */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+            flex-grow: 1;
+        }
+
+        .login-card {
+            display: flex;
+            width: 900px;
+            max-width: 95%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .card-image {
+            flex: 1;
+            background-color: #D5F5E3; /* Light Green background */
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .card-image img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .card-form {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-form h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-box input:focus {
+            border-color: #5cb85c;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.2);
+        }
+
+        .btn-login-main {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn-login-main:hover {
+            background-color: #4cae4c;
+        }
+
+        .btn-google-login {
+            background: white;
+            border: 1px solid #5cb85c;
+            color: #5cb85c;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-google-login:hover {
+            background-color: #f8f9fa;
+        }
+
+        .google-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Message styles */
+        .message {
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #5cb85c;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #5cb85c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #E8F8F5;
+            padding: 50px 10% 20px;
+            margin-top: auto;
+            flex-shrink: 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .footer-col ul { 
+            list-style: none; 
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #d1ece5;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .login-card {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .card-image {
+                height: 200px;
+                padding: 20px;
+            }
+            
+            .card-form {
+                padding: 30px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            header {
+                flex-wrap: wrap;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .nav-right {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-left">
+            <img src="images/logo.png" class="logo-link">
+                <i class="fas fa-graduation-cap" style="font-size: 24px; color: #5cb85c;"></i>
+                <span style="margin-left: 10px; font-weight: 600;">Vetri Digital College</span>
+            </a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="What do you want to learn?">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="nav-right">
+            <a href="login.html" class="btn-login-nav">Login</a>
+            <a href="signup.html" class="btn-signup-nav">SignUp</a>
+        </div>
+    </header>
+
+    <div class="banner">
+        <h1>Login to Your Account</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="login-card">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Student Learning">
+            </div>
+            <div class="card-form">
+                <h2>Log In</h2>
+                
+                <!-- Success/Error Messages -->
+                <div id="successMessage" class="message success-message"></div>
+                <div id="errorMessage" class="message error-message"></div>
+                
+                <form id="loginForm">
+                    <div class="input-box">
+                        <i class="far fa-envelope"></i>
+                        <input type="email" id="emailInput" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="passInput" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="forgot-password">
+                        <a href="forgot-password.html">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login-main">Login</button>
+                </form>
+                
+                <button class="btn-google-login" id="googleLogin">
+                    <svg class="google-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Login with Google
+                </button>
+                
+                <div class="signup-link">
+                    Don't have an account? <a href="signup.html">Sign up here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <i class="fas fa-graduation-cap" style="font-size: 24px; color: #5cb85c;"></i>
+                    <span style="font-weight: 600; font-size: 18px;">Vetri Digital College</span>
+                </div>
+                <p>Your journey to knowledge starts here. Explore, Enroll, Excel!</p>
+            </div>
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul>
+                    <li><a href="about.html" style="text-decoration: none; color: inherit;">About us</a></li>
+                    <li><a href="contact.html" style="text-decoration: none; color: inherit;">Contact us</a></li>
+                    <li><a href="privacy.html" style="text-decoration: none; color: inherit;">Privacy policy</a></li>
+                    <li><a href="terms.html" style="text-decoration: none; color: inherit;">Terms of use</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="team.html" style="text-decoration: none; color: inherit;">Our team</a></li>
+                    <li><a href="#testimonials" style="text-decoration: none; color: inherit;">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Address</h3>
+                <p><i class="far fa-envelope"></i> Vetridigitalcollege.com</p>
+                <p><i class="fas fa-phone"></i> 8438164827 / 8438781327</p>
+                <p><i class="fas fa-map-marker-alt"></i> VTS & VIS, April's Complex,<br>Shanthi Complex, Surandai.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright © 2025 Vetri digital college | All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('emailInput').value.trim();
+            const password = document.getElementById('passInput').value;
+
+            // Clear previous messages
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+
+            // Validation
+            if(!email || !password) {
+                showError("Please fill in both email and password");
+                return;
+            }
+
+            if(!validateEmail(email)) {
+                showError("Please enter a valid email address");
+                return;
+            }
+
+            // Check if user exists in localStorage (from signup)
+            try {
+                const users = JSON.parse(localStorage.getItem('vetriUsers')) || [];
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if(user) {
+                    // Successful login
+                    localStorage.setItem('userLoggedIn', 'true');
+                    localStorage.setItem('currentUserName', user.name);
+                    localStorage.setItem('currentUserEmail', user.email);
+                    
+                    showSuccess("Login successful! Redirecting to homepage...");
+                    
+                    // Redirect to index.html after successful login
+                    setTimeout(() => {
+                        window.location.href = 'index.html?login=success';
+                    }, 1500);
+                } else {
+                    // Check if email exists but password is wrong
+                    const emailExists = users.some(u => u.email === email);
+                    if(emailExists) {
+                        showError("Incorrect password. Please try again.");
+                    } else {
+                        showError("No account found with this email. Please sign up first.");
+                    }
+                }
+                
+            } catch(error) {
+                showError("An error occurred. Please try again.");
+                console.error("Login error:", error);
+            }
+        });
+
+        // Google login button
+        document.getElementById('googleLogin').addEventListener('click', function() {
+            // In a real application, this would integrate with Google OAuth
+            // For now, we'll simulate Google login
+            showSuccess("Google login would be implemented here. For demo, please use the form.");
+            
+            // Simulate Google login (for demo purposes)
+            setTimeout(() => {
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('currentUserName', 'Google User');
+                localStorage.setItem('currentUserEmail', 'googleuser@example.com');
+                window.location.href = 'index.html?login=success&provider=google';
+            }, 1000);
+        });
+
+        // Helper functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                successEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+            if(isLoggedIn) {
+                // If user is already logged in, redirect to home
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Demo accounts for testing
+        function setupDemoAccounts() {
+            // Check if demo accounts already exist
+            let users = JSON.parse(localStorage.getItem('vetriUsers')) || [];
+            
+            // Add demo accounts if they don't exist
+            const demoAccounts = [
+                { name: "John Doe", email: "john@example.com", password: "password123", registeredAt: new Date().toISOString() },
+                { name: "Jane Smith", email: "jane@example.com", password: "demo123", registeredAt: new Date().toISOString() },
+                { name: "Test User", email: "test@example.com", password: "test123", registeredAt: new Date().toISOString() }
+            ];
+            
+            let added = false;
+            demoAccounts.forEach(demoAccount => {
+                if(!users.some(user => user.email === demoAccount.email)) {
+                    users.push(demoAccount);
+                    added = true;
+                }
+            });
+            
+            if(added) {
+                localStorage.setItem('vetriUsers', JSON.stringify(users));
+                console.log("Demo accounts added for testing");
+            }
+        }
+
+        // Setup demo accounts on page load
+        setupDemoAccounts();
+    </script>
+</body>
+</html>
